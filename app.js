@@ -34,19 +34,16 @@ app.post('/users',(request, response) => {
 	users.push(newUser);
 	response.json(newUser);
 	//console.log(newUser);
-
-
 });
 
 //Implement PUT request
 app.put('/users',(request, response) => {
 	const userId = request.query.id;
-	//response.send("klk")
 
 	const userToUpdate = users.find(userResult => userResult.id == userId);
 
 	if(userToUpdate) {
-		response.send(`The user ${userId}was updated successfully`);
+		response.send(`The user ${userId} was updated successfully`);
 	} else {
 		response.status(404).send(`User with ID ${userId} not found`)
 	}
