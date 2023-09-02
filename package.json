@@ -1,0 +1,17 @@
+{
+  "name": "crud-node.js",
+  "version": "1.0.0",
+  "description": "1. GET Registrar nuevos usuarios desde el UI -\r 2. POST Eliminar Usuario de la tabla y del server\r 3. Editar usuario",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^3.0.1"
+  }
+}
