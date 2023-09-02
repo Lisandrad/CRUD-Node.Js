@@ -2,10 +2,8 @@ const express = require('express')
 const app = express()
 
 app.use(express.json()); // --> Midleware
-app.use(express.static( __dirname, '/CRUD-NODE.JS')); // --> Agregando ruta para conectar con el frontend
+// app.use(express.static( __dirname, '/CRUD-NODE.JS')); // --> Agregando ruta para conectar con el frontend
 
-let users=[];
-let _id = 0;
 
 //endPoint
 app.get('/users',(request, response) => {
@@ -25,21 +23,32 @@ app.get('/users', (request, response) => {
 });
 
 //Implement POST request
+let users=[];
+let _id = 0;
+
 app.post('/users',(request, response) => {
 	const {user, username} = request.body;
 
 	_id += 1;
-	const newUser = { id: id, name: name, username: username}
+	const newUser = { id: _id, user: user, username: username}
 	users.push(newUser);
+	response.json(newUser);
+	//console.log(newUser);
+
 
 });
 
 //Implement PUT request
-app.put('/users/:id', (request, response) => {
-	const userId = request.body;
+app.put('/users',(request, response) => {
+	const userId = request.query.id;
+	//response.send("klk")
 
-	if( users. filter(userResult => userResult.id == userId)) {
-		response.send(`The user ${userId}was updated successfully`)
+	const userToUpdate = users.find(userResult => userResult.id == userId);
+
+	if(userToUpdate) {
+		response.send(`The user ${userId}was updated successfully`);
+	} else {
+		response.status(404).send(`User with ID ${userId} not found`)
 	}
 });
 
