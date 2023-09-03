@@ -2,8 +2,7 @@ const express = require('express')
 const app = express()
 
 app.use(express.json()); // --> Midleware
-// app.use(express.static( __dirname, '/CRUD-NODE.JS')); // --> Agregando ruta para conectar con el frontend
-
+app.use(express.static(__dirname, '/CRUD-NODE'));  // --> Agregando ruta para conectar con el frontend
 
 //endPoint
 app.get('/users',(request, response) => {
@@ -61,4 +60,7 @@ app.delete('/users', (request, response) => {
 	}
 });
 
-app.listen(3000);
+const port = 3000;
+app.listen(port => {
+	console.log(`Servidor escuchando en el puerto ${port}`);
+});
