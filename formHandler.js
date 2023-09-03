@@ -27,8 +27,8 @@ function addRow(user) {
     <td> ${user.index} </td>
     <td> ${user.name}  </td>
     <td> ${user.username}  </td>
-    <td> <button onclick="delUser(${user.id})"> X </button> </td>
-    <td> <button onclick="getValueForEditing(${user.id}, '${user.name}')"> Edit </button> </td>
+    <td> <button onclick="delUser(${user.id})"> X </button> 
+     <button onclick="getValueForEditing(${user.id}, '${user.name}')"> E </button> </td>
   `;
   tbody.appendChild(tr);
 }
@@ -62,7 +62,7 @@ async function delUser(id) {
     headers: myHeaders
   };
 
-  const endPoint = `${urlApiBase}/${id}`;
+  const endPoint = `${urlApiBase}/?id=${id}`;
 
   try {
     const response = await fetch(endPoint, requestOptions);
@@ -74,6 +74,7 @@ async function delUser(id) {
 }
 
 function getValueForEditing(id, name) {
+  console.log(getValueForEditing);
   txtName.value = name;
   toEditId = id;
 }
@@ -91,7 +92,7 @@ async function saveEditing() {
     headers: myHeaders
   };
 
-  const endPoint = `${urlApiBase}/${toEditId}`;
+  const endPoint = `${urlApiBase}/?id=${toEditId}`;
 
   try {
     const response = await fetch(endPoint, requestOptions);
@@ -99,7 +100,6 @@ async function saveEditing() {
     clearInputs();
     getAll();
   } catch (ex) {
-    console.log(ex);
     alert('Ocurrió un error inesperado');
   }
 }
